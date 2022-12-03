@@ -4,3 +4,4 @@ test_guilds=(
 reload=True
 dev_id=712631530002055169
 token='MTAzODA2NTg2NjcyMzU3NzkxNg.G2OLxC.-ub2DAxYlVUqErTXbSuUgoyBMcBRk9727Rj0XA'
+token
