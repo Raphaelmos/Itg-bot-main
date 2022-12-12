@@ -197,17 +197,23 @@ class settings(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
+		global tek_msg
+		tek_msg = None
 		cursor.execute(f"""SELECT * from settings WHERE guild=(?)""", (message.guild.id,))
 		table = cursor.fetchall()
 		try:
 			if table[0][3] == 1:
-				tek_msg = 
-				last_msg = 
+				print(tek_msg)
+				if tek_msg == message.content:
+					print("1")
+					tek_msg = message.content
+				else:
+					print("0")
+					tek_msg = message.content
 			else:
 				pass
 		except IndexError:
 			pass
-		print(message.content)
 
 
 def setup(bot: commands.Bot):

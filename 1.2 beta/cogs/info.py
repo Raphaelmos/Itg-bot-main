@@ -11,7 +11,7 @@ class ButtonAccept(disnake.ui.View):
   async def button(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
     pass
   
-  @disnake.ui.button(label="GitHub", style=disnake.ButtonStyle.url, emoji="💾", url = "https://github.com/IvanTopGaming/Itg-bot")
+  @disnake.ui.button(label="GitHub", style=disnake.ButtonStyle.url, emoji="💾", url = "https://github.com/IvanTopGaming/Itg-bot-main")
   async def button2(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
     pass
 
