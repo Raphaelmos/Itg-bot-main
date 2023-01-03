@@ -11,7 +11,7 @@ cursor = connection.cursor()
 cursor.execute("""CREATE TABLE IF NOT EXISTS settings (
 	guild INT,
 	channel_ID INT,
-	is_alarm BIT,
+	is_alarm BIT
 	)""")
 
 global is_alarm

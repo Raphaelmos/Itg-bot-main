@@ -4,4 +4,4 @@ test_guilds=(
 reload=True
 dev_id=712631530002055169
 black_guilds=[]
-token='MTAzODA2NTg2NjcyMzU3NzkxNg.GVpAZf.Nn7sJe2vVAKt5eZcXv_eEaN22t6NsWsl1HWOq4'
+token='MTAzODA2NTg2NjcyMzU3NzkxNg.G-wPsh.-sTmDKw6nGQwDjblMhwBvIj9FJy4l4LsqA4sj8'
