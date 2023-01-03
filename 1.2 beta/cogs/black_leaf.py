@@ -1,8 +1,9 @@
 import disnake
 from disnake.ext import commands
 from embeds import *
+from config import *
 
-black_guilds=[]
+black_guilds=black_guilds
 
 class black_leaf(commands.Cog):
 	def __init__(self, bot: commands.Bot):

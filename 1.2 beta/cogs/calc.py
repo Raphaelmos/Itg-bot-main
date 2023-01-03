@@ -33,7 +33,7 @@ class calc(commands.Cog):
 				title="Calc",
 				description=f"Итак: \n``{to_do}`` будет: \n\n**``{getNumbers(to_do)}``**",
 				colour=0xF0C43F,
-				)        
+				)
 			await inter.response.send_message(embed = calc_embed)
 		else:
 			emb = failed_calc_embed

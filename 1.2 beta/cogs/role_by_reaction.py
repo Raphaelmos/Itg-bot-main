@@ -27,17 +27,34 @@ class Role_by_reaction(commands.Cog):
   @commands.Cog.listener()
   async def on_reaction_add(self,  reaction, user):
     try:
-      if not reaction == emoji:
+      if not reaction == emoji: # reaction != emoji
         if str(user) == 'ITG-bot BETA#1790':
           pass
         else:
           await user.add_roles(name_role)
-          await user.send(f"Роль <{name_role}> была взята.")
+          await user.send(f"Роль **<{name_role}>** была взята.")
       else:
         pass
 
     except disnake.errors.Forbidden:
       await user.send(embed = missing_permissions_embed)
+    
+  @commands.Cog.listener()
+  async def on_reaction_remove(reaction, user):
+    print("Reaction remove")
+    try:
+      if not reaction == emoji: # reaction != emoji
+        if str(user) == 'ITG-bot BETA#1790':
+          pass
+        else:
+          await user.remove_role(name_role, atomic=True)
+          await user.send(f"Роль **<{name_role}>** была снята.")
+      else:
+        pass
+
+    except disnake.errors.Forbidden:
+      await user.send(embed = missing_permissions_embed)
+      
 
 
 
