@@ -17,9 +17,9 @@ def secure_eval(action):
 		return "Я не могу выполнить данную команду"
 
 '''def secure_eval(action):
-    if not any([letter for letter in action if letter in allowed]):
-        return eval(action)
-    return "Я не могу выполнить данную команду"'''
+ if not any([letter for letter in action if letter in allowed]):
+	return eval(action)
+	 return "Я не могу выполнить данную команду"'''
 
 class calc(commands.Cog):
 	def __init__(self, bot: commands.Bot):
@@ -29,10 +29,8 @@ class calc(commands.Cog):
 	async def calc(self, inter, to_do: str):
 		try:
 			await inter.response.send_message(secure_eval(to_do))
-		except SyntaxError:
-			await inter.response.send_message("Синтаксическая ошибка")
-		else:
-			await inter.response.send_message("Я не могу выполнить данную команду")
+		finally:
+			await inter.response.send_message("Слишком большое число")
 
 def setup(bot: commands.Bot):
 	bot.add_cog(calc(bot))
