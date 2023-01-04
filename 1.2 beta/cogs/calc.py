@@ -11,9 +11,7 @@ def secure_eval(action):
 		else:
 			is_true = 0
 			break
-	if len(action) > 8:
-		return "Я не могу выполнить данную команду"
-	elif is_true:
+	if is_true:
 		return eval(action)
 	else:
 		return "Я не могу выполнить данную команду"
@@ -29,7 +27,12 @@ class calc(commands.Cog):
 		
 	@commands.slash_command(description = "Вычислить что-либо")
 	async def calc(self, inter, to_do: str):
-		await inter.response.send_message(secure_eval(to_do))
+		try:
+			await inter.response.send_message(secure_eval(to_do))
+		except SyntaxError:
+			await inter.response.send_message("Синтаксическая ошибка")
+		else:
+			await inter.response.send_message("Я не могу выполнить данную команду")
 
 def setup(bot: commands.Bot):
 	bot.add_cog(calc(bot))
