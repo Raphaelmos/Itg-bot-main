@@ -32,24 +32,24 @@ class Unban(commands.Cog):
   def __init__(self, bot: commands.Bot):
     self.bot = bot
             
-@commands.slash_command(description = "Разбанить пользователя", default_member_permissions=disnake.Permissions(ban_members=True))
-async def unban(self, inter):
-  try:
-    ban_list = await inter.guild.bans(limit=25).flatten()
-    if not len(ban_list) == 0:
-      global users
-      global id
-      users = []
-      for i in range(0, len(ban_list)):
-        user = ban_list[i][1].name
-        id = await self.bot.fetch_user(ban_list[i][1].id)
-        users.append(user) 
+  @commands.slash_command(description = "Разбанить пользователя", default_member_permissions=disnake.Permissions(ban_members=True))
+  async def unban(self, inter):
+    try:
+      ban_list = await inter.guild.bans(limit=25).flatten()
+      if not len(ban_list) == 0:
+        global users
+        global id
+        users = []
+        for i in range(0, len(ban_list)):
+          user = ban_list[i][1].name
+          id = await self.bot.fetch_user(ban_list[i][1].id)
+          users.append(user) 
 
-      await inter.response.send_message(embed = msg_unban_embed, view=DropdownView(), ephemeral=True)
-    else:
-      await inter.response.send_message(embed = failed_unban_embed)
-  except disnake.errors.Forbidden:
-    await inter.response.send_message(embed = missing_permissions_embed)
+        await inter.response.send_message(embed = msg_unban_embed, view=DropdownView(), ephemeral=True)
+      else:
+        await inter.response.send_message(embed = failed_unban_embed)
+    except disnake.errors.Forbidden:
+      await inter.response.send_message(embed = missing_permissions_embed)
 
 
 
