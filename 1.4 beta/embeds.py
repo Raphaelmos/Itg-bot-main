@@ -47,7 +47,7 @@ failed_guess_embed = disnake.Embed(
 
 help_embed = disnake.Embed(
 		title="Помощь по командам:",
-		description="Помощь по командам:\n(Все параметры обязательны)\n\n/ban <Пользователь>\n/calc <Число_1> <Что сделать> <Число_2>\n/clear <кол-во>\n/guess <Число_1> <Число_2>.....\n/info\n/kick <Пользователь>\n/mute <Пользователь>\n/role_by_reaction BETA\n/say <Текст>\n/settings\n/send_private BETA\n/unban",
+		description="Помощь по командам:\n(Все параметры обязательны)\n\n/ban <Пользователь>\n/calc <Число_1> <Что сделать> <Число_2>\n/clear <кол-во>\n/guess <Число_1> <Число_2>.....\n/info\n/kick <Пользователь>\n/mute <Пользователь>\n/role_by_reaction <message> <reaction> <role>\n/say <Текст>\n/settings\n/send_private BETA\n/unban",
 		color=disnake.Colour.gold(),
 	)
 help_embed.set_footer(
