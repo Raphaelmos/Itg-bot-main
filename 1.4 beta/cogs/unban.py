@@ -28,7 +28,7 @@ class DropdownView(disnake.ui.View):
 
 
 
-class Unban(commands.Cog):
+class unban(commands.Cog):
   def __init__(self, bot: commands.Bot):
     self.bot = bot
             
@@ -55,4 +55,4 @@ class Unban(commands.Cog):
 
 
 def setup(bot: commands.Bot):
-  bot.add_cog(Unban(bot))
+  bot.add_cog(unban(bot))

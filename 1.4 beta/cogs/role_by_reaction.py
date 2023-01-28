@@ -3,7 +3,7 @@ from disnake.ext import commands
 from embeds import *
 
 
-class Role_by_reaction(commands.Cog):
+class role_by_reaction(commands.Cog):
   def __init__(self, bot: commands.Bot):
     self.bot = bot
             
@@ -59,4 +59,4 @@ class Role_by_reaction(commands.Cog):
 
 
 def setup(bot: commands.Bot):
-  bot.add_cog(Role_by_reaction(bot))
+  bot.add_cog(role_by_reaction(bot))
