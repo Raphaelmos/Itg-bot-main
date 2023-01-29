@@ -6,8 +6,8 @@ from config import *
 bot = commands.Bot(
   command_prefix=".",
   intents=disnake.Intents.all(),
-  test_guilds=test_guilds,
-  reload = reload)
+  reload = reload
+  )
 bot.remove_command("help")
 bot.load_extensions('cogs')
 print("Cogs is loaded...")
