@@ -15,10 +15,6 @@ class ButtonAccept(disnake.ui.View):
 	async def button2(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
 		pass
 
-	@disnake.ui.button(label="Просто кнопка", style=disnake.ButtonStyle.green, emoji="🖲️")
-	async def button3(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-		await interaction.response.send_message("Я же сказал, это просто кнопка.", ephemeral = True)
-
 class help(commands.Cog):
 	def __init__(self, bot: commands.Bot):
 		self.bot = bot
