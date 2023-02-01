@@ -179,8 +179,3 @@ join_embed = disnake.Embed(
 	**Предупреждение! Данная бета верися не стабильна при проблемах обращайтесь на сервер поддержки.**''',
 	colour=disnake.Colour.gold(),
 	)
-spam_embed = disnake.Embed(
-	title="",
-	description="",
-	colour=disnake.Colour.gold(),
-	)
