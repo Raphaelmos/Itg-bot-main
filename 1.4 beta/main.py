@@ -6,7 +6,7 @@ from config import *
 bot = commands.Bot(
 	command_prefix=".",
 	intents=disnake.Intents.all(),
-	test_guilds=[1031065284783648768],
+#	test_guilds=[1031065284783648768],
 	reload = reload
 	)
 bot.remove_command("help")
