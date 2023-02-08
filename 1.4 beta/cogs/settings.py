@@ -13,9 +13,10 @@ CREATE TABLE IF NOT EXISTS settings (
 	channel_id INTEGER
 );
 """
+
 def create_connection(path):
 	connection = None
-	try:
+	try:														# Подключиться к базе даннных
 		connection = sqlite3.connect(path)
 		print("Connection to SQLite DB successful")
 	except Error as e:
@@ -25,7 +26,15 @@ def create_connection(path):
 
 def execute_query(query):
 	try:
-		cursor.execute(query)
+		cursor.execute(query)									# Выполнить действие с таблицой
+		connection.commit()
+		print("Query executed successfully")
+	except Error as e:
+		print(f"The error '{e}' occurred")
+
+def write(query):
+	try:
+		cursor.execute(query)									# Записать данные в таблицу
 		connection.commit()
 		print("Query executed successfully")
 	except Error as e:
@@ -42,6 +51,7 @@ def execute_read_query(query):
 
 global connection
 global cursor
+
 connection = create_connection('settings.db')
 cursor = connection.cursor()
 execute_query(create_table)
@@ -50,11 +60,11 @@ class settings(commands.Cog):
 	def __init__(self, bot: commands.Bot):
 		self.bot = bot
 			
-	@commands.slash_command()
+	@commands.slash_command()																# Slash command
 	async def settings(self, inter):
 		await inter.response.send_message(embed = settings_embed, view = buttons())
 
-class buttons(disnake.ui.View):
+class buttons(disnake.ui.View):																# Buttons
 	def __init__(self):
 		super().__init__(timeout=None)
 	
@@ -62,7 +72,7 @@ class buttons(disnake.ui.View):
 	async def first_button(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
 		await inter.response.send_modal(MyModal())
 
-class MyModal(disnake.ui.Modal):
+class MyModal(disnake.ui.Modal):															# Modal Window
 	def __init__(self):
 		components = [
 			disnake.ui.TextInput(
@@ -85,16 +95,17 @@ class MyModal(disnake.ui.Modal):
 			components=components,
 		)
 
-	async def callback(self, inter: disnake.ModalInteraction):
-		if inter.text_values['is_log'] == 'Yes' or inter.text_values['is_log'] == 'yes':
-			if inter.text_values['channel'].isdigit():
+	async def callback(self, inter: disnake.ModalInteraction):									# Callback Modal Window
+		if inter.text_values['is_log'] == 'Yes' or inter.text_values['is_log'] == 'yes':			# If 'yes'
+			if inter.text_values['channel'].isdigit():													# Проверка на числа
 				await inter.response.send_message('Yes')
-			else:
-				await inter.response.send_message(embed = failed_settings_embed)
-		elif inter.text_values['is_log'] == 'No' or inter.text_values['is_log'] == 'no':
-			await inter.response.send_message(embed = off_settings_embed)
-		else:
-			await inter.response.send_message(embed = failed_settings_embed)
+			else:																						# Если буквы
+				await inter.response.send_message(embed = failed_settings_embed)							# То отправляет ошибку
+		elif inter.text_values['is_log'] == 'No' or inter.text_values['is_log'] == 'no':			# If 'no'
+			
+			await inter.response.send_message(embed = off_settings_embed)								# Выключаем отправку логов
+		else:																						# Если не 'yes' или не 'no'
+			await inter.response.send_message(embed = failed_settings_embed)							# Если нет то отправляет ошибку
 
 def setup(bot: commands.Bot):
 	bot.add_cog(settings(bot))
