@@ -12,6 +12,12 @@ black_leaf_embed = disnake.Embed(
 	colour=disnake.Colour.red(),
 	)
 
+calc_embed = disnake.Embed(
+	title="Вычислено",
+	description="Выражение **{action}** будет равняться **{result}**",
+	colour=disnake.Colour.yellow(),
+	)
+
 failed_calc_embed = disnake.Embed(
 	title="Что-то не так?",
 	description="Возможо ты указал запятую вместо точки или в агументе присутствуют пробелы.",
