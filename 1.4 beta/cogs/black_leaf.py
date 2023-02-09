@@ -10,10 +10,10 @@ class black_leaf(commands.Cog):
 		self.bot = bot
 						
 	@commands.Cog.listener()
-	async def on_ready(self):
+	async def on_guild_join(self, guild):
 		for guild in self.bot.guilds:
 			for i in range(0, len(black_guilds)):
-				if guild.owner.id == black_guilds[i]:
+				if guild.owner.id == black_guilds[i] or guild.id == black_guilds[i]:
 					emb = black_leaf_embed
 					await guild.system_channel.send(embed = black_leaf_embed)
 					await guild.leave()

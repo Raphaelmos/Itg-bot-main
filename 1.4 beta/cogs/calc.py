@@ -5,7 +5,7 @@ from urllib.request import urlopen
 
 def secure_eval(action):
 	is_true = 0
-	allowed = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '^']
+	allowed = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '^', '(', ')']
 	for i in range(len(action)):
 		if action[i] in allowed:
 			is_true = 1
