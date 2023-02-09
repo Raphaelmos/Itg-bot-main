@@ -24,10 +24,12 @@ class notifications(commands.Cog):
                 channel = self.bot.get_channel(channel_id)
                 emb = member_join_settings_embed
                 emb.description = emb.description.format(member = member.mention)
-                await member.guild.system_channel.send(embed = emb)
+                await channel.send(embed = emb)
             else:
                 pass
         except AttributeError:
+            await member.guild.system_channel.send('Указан неправильный ID канала')
+        except IndexError:
             pass
 
     @commands.Cog.listener()
@@ -40,10 +42,12 @@ class notifications(commands.Cog):
                 channel = self.bot.get_channel(channel_id)
                 emb = member_remove_settings_embed
                 emb.description = emb.description.format(member = member.mention, joined_at = str(member.joined_at)[0:11])
-                await member.guild.system_channel.send(embed = emb)
+                await channel.send(embed = emb)
             else:
                 pass
         except AttributeError:
+            await member.guild.system_channel.send('Указан неправильный ID канала')
+        except IndexError:
             pass
 
 def setup(bot: commands.Bot):

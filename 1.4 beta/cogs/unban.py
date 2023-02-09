@@ -47,9 +47,9 @@ class unban(commands.Cog):
 
 				await inter.response.send_message(embed = msg_unban_embed, view=DropdownView(), ephemeral=True)
 			else:
-				await inter.response.send_message(embed = failed_unban_embed)
+				await inter.response.send_message(embed = failed_unban_embed, ephemeral=True)
 		except disnake.errors.Forbidden:
-			await inter.response.send_message(embed = missing_permissions_embed)
+			await inter.response.send_message(embed = missing_permissions_embed, ephemeral=True)
 
 
 

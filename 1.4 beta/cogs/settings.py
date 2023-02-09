@@ -19,9 +19,9 @@ class settings(commands.Cog):
 	def __init__(self, bot: commands.Bot):
 		self.bot = bot
 			
-	@commands.slash_command()																# Slash command
+	@commands.slash_command(description="Настройки бота", default_member_permissions=disnake.Permissions(administrator=True))																# Slash command
 	async def settings(self, inter):
-		await inter.response.send_message(embed = settings_embed, view = buttons())
+		await inter.response.send_message(embed = settings_embed, view = buttons(), ephemeral=True)
 
 class buttons(disnake.ui.View):																# Buttons
 	def __init__(self):
@@ -63,13 +63,13 @@ class MyModal(disnake.ui.Modal):															# Modal Window
 					if len(result) == 0:
 						cursor.execute(f"""INSERT INTO settings (is_log, guild_id, channel_id) VALUES (1, {inter.guild.id}, {inter.text_values['channel']});""")
 						connection.commit()
-						await inter.response.send_message(embed = table_settings_embed)
+						await inter.response.send_message(embed = table_settings_embed, ephemeral=True)
 					elif len(result) > 0:
 						cursor.execute(f"""UPDATE settings SET is_log = 1, channel_id = {inter.text_values['channel']} WHERE guild_id = {inter.guild.id}""")
 						connection.commit()
-						await inter.response.send_message(embed = changed_settings_embed)
+						await inter.response.send_message(embed = changed_settings_embed, ephemeral=True)
 				else:
-					await inter.response.send_message(embed = failed_settings_embed)
+					await inter.response.send_message(embed = failed_settings_embed, ephemeral=True)
 			elif inter.text_values['is_log'] == 'No' or inter.text_values['is_log'] == 'no':
 				cursor.execute(f"""SELECT * from settings WHERE guild_id = {inter.guild.id}""")
 				result = cursor.fetchall()
@@ -79,9 +79,9 @@ class MyModal(disnake.ui.Modal):															# Modal Window
 				elif len(result) > 0:
 					cursor.execute(f"""UPDATE settings SET is_log = 0 WHERE guild_id = {inter.guild.id}""")
 					connection.commit()
-				await inter.response.send_message(embed = off_settings_embed)
+				await inter.response.send_message(embed = off_settings_embed, ephemeral=True)
 			else:
-				await inter.response.send_message(embed = failed_settings_embed)
+				await inter.response.send_message(embed = failed_settings_embed, ephemeral=True)
 		except Error as e:
 			print(f"The error '{e}' occurred")
 

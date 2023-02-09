@@ -17,6 +17,15 @@ class black_leaf(commands.Cog):
 					emb = black_leaf_embed
 					await guild.system_channel.send(embed = black_leaf_embed)
 					await guild.leave()
+	
+	@commands.Cog.listener()
+	async def on_ready(self):
+		for guild in self.bot.guilds:
+			for i in range(0, len(black_guilds)):
+				if guild.owner.id == black_guilds[i] or guild.id == black_guilds[i]:
+					emb = black_leaf_embed
+					await guild.system_channel.send(embed = black_leaf_embed)
+					await guild.leave()
 
 
 

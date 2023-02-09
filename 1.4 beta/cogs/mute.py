@@ -7,7 +7,7 @@ class mute(commands.Cog):
 		self.bot = bot
 						
 	@commands.slash_command(description = "Замьютить пользователя", default_member_permissions=disnake.Permissions(mute_members=True))
-	async def mute(self, inter, member: disnake.Member, time: int, reason: str):
+	async def mute(self, inter, member: disnake.Member, time: int, *, reason: str):
 		try:
 			await member.timeout(duration = time*60, reason = reason)
 			emb = mute_embed

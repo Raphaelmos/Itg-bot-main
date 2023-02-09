@@ -12,7 +12,7 @@ class ban(commands.Cog):
 		try:
 			await member.ban(reason=reason)
 			emb = ban_embed
-			emb.description = emb.description.format(member=member, reason=reason)
+			emb.description = emb.description.format(member=member.mention, reason=reason)
 			await inter.response.send_message(embed=emb)
 		except disnake.errors.Forbidden:
 			await inter.response.send_message(embed=missing_permissions_embed)

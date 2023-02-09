@@ -156,13 +156,13 @@ off_settings_embed = disnake.Embed(
 member_join_settings_embed = disnake.Embed(
 	title="Новый участник",
 	description="{member} присоеденился к серверу.",
-	colour=0xD2691E,
+	colour=0x03c6fc,
 	)
 
 member_remove_settings_embed = disnake.Embed(
 	title="Участник ушел",
 	description="{member} ушел с сервера. Присоеденился **{joined_at}**",
-	colour=0xD2691E,
+	colour=0x03c6fc,
 	)
 
 unban_embed = disnake.Embed(
