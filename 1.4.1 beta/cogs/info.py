@@ -26,7 +26,7 @@ class info(commands.Cog):
 		RAM = f"**{round(memory_usage()[0])} мб**"
 		date = "**24.09.2022**"
 		dev = "**IvanTopGaming#2635**"
-		version = "**1.4 beta**"
+		version = "**1.4.1 beta**"
 
 		emb = info_embed
 		emb.description = emb.description.format(ping = ping, RAM = RAM, date = date, dev = dev, version = version)
