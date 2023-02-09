@@ -6,55 +6,14 @@ from disnake import TextInputStyle
 from sqlite3 import Error
 from embeds import *
 
-create_table = """
-CREATE TABLE IF NOT EXISTS settings (
-	is_log INTEGER,
-	guild_id INTEGER,
-	channel_id INTEGER
-);
-"""
-
-def create_connection(path):
-	connection = None
-	try:														# Подключиться к базе даннных
-		connection = sqlite3.connect(path)
-		print("Connection to SQLite DB successful")
-	except Error as e:
-		print(f"The error '{e}' occurred")
-
-	return connection
-
-def execute_query(query):
-	try:
-		cursor.execute(query)									# Выполнить действие с таблицой
-		connection.commit()
-		print("Query executed successfully")
-	except Error as e:
-		print(f"The error '{e}' occurred")
-
-def write(query):
-	try:
-		cursor.execute(query)									# Записать данные в таблицу
-		connection.commit()
-		print("Query executed successfully")
-	except Error as e:
-		print(f"The error '{e}' occurred")
-
-def execute_read_query(query):
-	result = None
-	try:
-		cursor.execute(query)
-		result = cursor.fetchall()
-		return result
-	except Error as e:
-		print(f"The error '{e}' occurred")
-
 global connection
 global cursor
 
-connection = create_connection('settings.db')
+connection = sqlite3.connect('settings.db')
+print("Connection to SQLite DB successful")
 cursor = connection.cursor()
-execute_query(create_table)
+cursor.execute("""CREATE TABLE IF NOT EXISTS settings (is_log INTEGER, guild_id INTEGER, channel_id INTEGER);""")
+connection.commit()
 
 class settings(commands.Cog):
 	def __init__(self, bot: commands.Bot):
@@ -95,17 +54,36 @@ class MyModal(disnake.ui.Modal):															# Modal Window
 			components=components,
 		)
 
-	async def callback(self, inter: disnake.ModalInteraction):									# Callback Modal Window
-		if inter.text_values['is_log'] == 'Yes' or inter.text_values['is_log'] == 'yes':			# If 'yes'
-			if inter.text_values['channel'].isdigit():													# Проверка на числа
-				await inter.response.send_message('Yes')
-			else:																						# Если буквы
-				await inter.response.send_message(embed = failed_settings_embed)							# То отправляет ошибку
-		elif inter.text_values['is_log'] == 'No' or inter.text_values['is_log'] == 'no':			# If 'no'
-			
-			await inter.response.send_message(embed = off_settings_embed)								# Выключаем отправку логов
-		else:																						# Если не 'yes' или не 'no'
-			await inter.response.send_message(embed = failed_settings_embed)							# Если нет то отправляет ошибку
+	async def callback(self, inter: disnake.ModalInteraction):
+		try:
+			if inter.text_values['is_log'] == 'Yes' or inter.text_values['is_log'] == 'yes':
+				if inter.text_values['channel'].isdigit():
+					cursor.execute(f"""SELECT * from settings WHERE guild_id = {inter.guild.id}""")
+					result = cursor.fetchall()
+					if len(result) == 0:
+						cursor.execute(f"""INSERT INTO settings (is_log, guild_id, channel_id) VALUES (1, {inter.guild.id}, {inter.text_values['channel']});""")
+						connection.commit()
+						await inter.response.send_message(embed = table_settings_embed)
+					elif len(result) > 0:
+						cursor.execute(f"""UPDATE settings SET is_log = 1, channel_id = {inter.text_values['channel']} WHERE guild_id = {inter.guild.id}""")
+						connection.commit()
+						await inter.response.send_message(embed = changed_settings_embed)
+				else:
+					await inter.response.send_message(embed = failed_settings_embed)
+			elif inter.text_values['is_log'] == 'No' or inter.text_values['is_log'] == 'no':
+				cursor.execute(f"""SELECT * from settings WHERE guild_id = {inter.guild.id}""")
+				result = cursor.fetchall()
+				if len(result) == 0:
+					cursor.execute(f"""INSERT INTO settings (is_log, guild_id, channel_id) VALUES (0, {inter.guild.id}, 00000);""")
+					connection.commit()
+				elif len(result) > 0:
+					cursor.execute(f"""UPDATE settings SET is_log = 0 WHERE guild_id = {inter.guild.id}""")
+					connection.commit()
+				await inter.response.send_message(embed = off_settings_embed)
+			else:
+				await inter.response.send_message(embed = failed_settings_embed)
+		except Error as e:
+			print(f"The error '{e}' occurred")
 
 def setup(bot: commands.Bot):
 	bot.add_cog(settings(bot))
