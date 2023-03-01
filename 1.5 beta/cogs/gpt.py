@@ -10,7 +10,7 @@ class gpt(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
             
-    @commands.slash_command()
+    @commands.slash_command(description = "Задать вопрос")
     async def chat_gpt(self, inter, task: str):
         await inter.response.send_message(f'Вопрос: {task}')
         message = await inter.channel.send('ChatGPT думает...')
