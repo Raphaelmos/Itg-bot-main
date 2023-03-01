@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from ImageParser import *
+from imageParser import *
 
 parser = YandexImage()
 

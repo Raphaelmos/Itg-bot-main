@@ -10,7 +10,7 @@ global connection
 global cursor
 
 connection = sqlite3.connect('settings.db')
-print("Connection to SQLite DB successful")
+print("Connection to SQLite DB settings successful")
 cursor = connection.cursor()
 cursor.execute("""CREATE TABLE IF NOT EXISTS settings (is_log INTEGER, guild_id INTEGER, channel_id INTEGER);""")
 connection.commit()
