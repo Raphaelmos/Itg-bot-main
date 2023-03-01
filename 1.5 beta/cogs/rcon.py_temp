@@ -9,7 +9,7 @@ class rcon(commands.Cog):
 		self.bot = bot
 
 	@commands.slash_command(description = "Rcon", default_member_permissions=disnake.Permissions(administrator=True))
-	async def rcon_exec(self, inter, to_do):
+	async def rcon(self, inter, to_do):
 		if inter.guild.id == 978144424540389386:
 			command = f'{to_do}'
 			client = Client(ip, port, password)

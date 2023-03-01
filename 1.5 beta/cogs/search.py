@@ -12,12 +12,9 @@ class search(commands.Cog):
 	async def search(inter, search: str):
 		for item in parser.search(search):
 			print(item.preview.url)
-			await inter.response.send_message(item.preview.url)
+			await inter.response.send_message(f"Поиск картинки по запросу: {search}\n{item.preview.url}")
 			break
 			
-			
-
-
 
 def setup(bot: commands.Bot):
 	bot.add_cog(search(bot))

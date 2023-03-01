@@ -1,9 +1,10 @@
 import disnake
 import openai
 from disnake.ext import commands
+from config import api_key, model_engine
 
-openai.api_key = "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"
-model_engine = "text-davinci-003"
+openai.api_key = api_key
+model_engine = model_engine
 
 class gpt(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -16,8 +17,8 @@ class gpt(commands.Cog):
         completion = openai.Completion.create(
             engine=model_engine,
             prompt=task,
-            max_tokens=1024,
-            temperature=0.5,
+            max_tokens=4097-len(task),
+            temperature=0,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0

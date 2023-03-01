@@ -1,0 +1,9 @@
+reload=False
+dev_id=712631530002055169
+black_guilds=[]
+token='TOKEN'
+ip = 'IP'
+port = PORT
+password = "PASSWORD"
+api_key = "API_KEY"
+model_engine = "MODEL"
