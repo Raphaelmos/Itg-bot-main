@@ -17,7 +17,7 @@ class gpt(commands.Cog):
         completion = openai.Completion.create(
             engine=model_engine,
             prompt=task,
-            max_tokens=4097-len(task),
+            max_tokens=4000-len(task),
             temperature=0,
             top_p=1,
             frequency_penalty=0,
