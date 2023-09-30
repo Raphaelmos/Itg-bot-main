@@ -1,6 +1,6 @@
-disnake==2.7.0
-aio-mc-rcon==3.2.0
-memory-profiler==0.61.0
-requests==2.28.2
-fake_headers==1.0.2
-openai==0.26.5
+disnake
+aio-mc-rcon
+memory-profiler
+requests
+fake_headers
+openai
