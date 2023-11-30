@@ -4,9 +4,12 @@
 Что бы запустить бота необхоимо установить необходимые пакеты. Все они содержатся в файле requirements.txt
 
 
+
 pip install -r requirements.txt (Windows)
 
 pip3 install -r requirements.txt (Linux, Mac OS)
+
+
 
 Далее необходимо указать токен бота в файле config.py. Его можно найти на https://discord.com/developers/applications
 и токен аккаунта OpenAI. Его прийдется либо купить, либо зарегестрировать новый аккаунт на сайте https://chat.openai.com/
