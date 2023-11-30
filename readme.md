@@ -6,5 +6,12 @@ pip install -r requirements.txt (Windows)
 pip3 install -r requirements.txt (Linux, Mac OS)
 
 Далее необходимо указать токен бота в файле config.py. Его можно найти на https://discord.com/developers/applications
+и токен аккаунта OpenAI. Его прийдется либо купить, либо зарегестрировать новый аккаунт на сайте https://chat.openai.com/
 
 После запускаем файл start.bat
+
+
+-----ДЛЯ РАЗРАБОТЧИКОВ-----
+Что бы удаленно управлять minecraft сервером есть rcon. В файл server.propereties нужно включить rcon, указать пароль, ip и порт и все эти же данные занести в файл config.py в боте
+Так же для бот поддерживает аддоны, путем добавления новых когов в папку cogs. Используемый api библитоека для discord это disnake. 
+При использовании dianake парралельно с discord невозможно из-за конфликтов. (Один и тот же токен не можент использоваться одновременно)
